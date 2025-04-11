@@ -5,97 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TRTR Bingo Board</title>
 <style>
-  :root {
-    --neon: #39ff14;
-    --bg: #000000;
-  }
-  body {
-    margin: 0;
-    padding: 2rem;
-    background: var(--bg);
-    color: var(--neon);
-    font-family: "Pretendard", "Noto Sans KR", sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
-  }
-  h1 {
-    font-size: 2.5rem;
-    letter-spacing: 0.15rem;
-    text-shadow: 0 0 8px var(--neon);
-  }
-  .status-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 820px;
-  }
-  #bingo-count {
-    font-size: 1.3rem;
-    font-weight: 600;
-    text-shadow: 0 0 6px var(--neon);
-  }
-  #reset-btn {
-    background: transparent;
-    color: var(--neon);
-    border: 2px solid var(--neon);
-    padding: 4px 12px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    text-shadow: 0 0 6px var(--neon);
-  }
-  #reset-btn:hover {
-    background: var(--neon);
-    color: var(--bg);
-  }
-  table {
-    border-collapse: collapse;
-  }
-  td {
-    position: relative;
-    border: 2px solid var(--neon);
-    width: 160px;
-    height: 160px;
-    padding: 0;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 0.9rem;
-    transition: background 0.25s, color 0.25s;
-  }
-  td label {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 6px;
-    cursor: pointer;
-  }
-  td label span {
-    pointer-events: none;
-    line-height: 1.3;
-  }
-  input[type="checkbox"] {
-    display: none;
-  }
-  td.checked {
-    background: var(--neon);
-    color: var(--bg);
-  }
-  td.checked span {
-    color: var(--bg);
-    text-shadow: none;
-  }
+  :root { --neon:#39ff14; --bg:#000; }
+  body{margin:0;padding:2rem;background:var(--bg);color:var(--neon);font-family:"Pretendard","Noto Sans KR",sans-serif;display:flex;flex-direction:column;align-items:center;gap:1.2rem;}
+  h1{font-size:2.5rem;letter-spacing:0.15rem;text-shadow:0 0 8px var(--neon);}  
+  /* status bar */
+  .status-bar{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:820px;gap:0.5rem;}
+  #bingo-count{font-size:1.3rem;font-weight:600;text-shadow:0 0 6px var(--neon);}
+  .actions{display:flex;gap:0.5rem;align-items:center;}
+  .btn, .link-btn{background:transparent;color:var(--neon);border:2px solid var(--neon);padding:4px 12px;font-size:0.9rem;cursor:pointer;text-shadow:0 0 6px var(--neon);text-decoration:none;}
+  .btn:hover, .link-btn:hover{background:var(--neon);color:var(--bg);}  
+  table{border-collapse:collapse;}
+  td{position:relative;border:2px solid var(--neon);width:160px;height:160px;padding:0;text-align:center;vertical-align:middle;font-size:0.9rem;transition:background .25s,color .25s;}
+  td label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px;cursor:pointer;}
+  td label span{pointer-events:none;line-height:1.3;}
+  input[type="checkbox"]{display:none;}
+  td.checked{background:var(--neon);color:var(--bg);}td.checked span{color:var(--bg);text-shadow:none;}
+  /* notes */
+  .notes{max-width:820px;font-size:0.85rem;line-height:1.4;margin-top:1.5rem;}
+  .notes h2{margin:0 0 0.5rem 0;font-size:1.1rem;text-shadow:0 0 6px var(--neon);}  
+  .notes ol{margin:0;padding-left:1.1rem;} .notes li{margin-bottom:0.8rem;} .notes strong{color:var(--neon);}  
+  @media(max-width:776px){td{height:140px;font-size:0.8rem;}}
+  @media(max-width:676px){td{height:120px;font-size:0.8rem;}}
+  @media(max-width:576px){td{height:100px;font-size:0.7rem;}}
+  @media(max-width:526px){td{height:90px;font-size:0.7rem;}}
 </style>
 </head>
 <body>
   <h1>TRTR BINGO</h1>
   <div class="status-bar">
     <div id="bingo-count">BINGO: 0</div>
-    <button id="reset-btn">Reset</button>
+    <div class="actions">
+      <a class="link-btn" id="insta-link" href="https://www.instagram.com/trtr.running.crew?igsh=MWduM2U5OG1kdzFhdg==" target="_blank" rel="noopener">TRTR 인스타</a>
+      <button class="btn" id="reset-btn">Reset</button>
+    </div>
   </div>
   <table id="bingo-table">
     <tr>
@@ -124,7 +66,7 @@
       <td><label><input type="checkbox"><span>본인 인스타스토리에<br>TRTR 스토리 태그</span></label></td>
       <td><label><input type="checkbox"><span>벙 1회 참석</span></label></td>
       <td><label><input type="checkbox"><span>TRTR 인스타에<br>댓글 3개 달기</span></label></td>
-      <td><label><input type="checkbox"><span>본인만의 회복 방법 공유</span></label></td>
+      <td><label><input type="checkbox"><span>본인만의<br>회복 방법 공유</span></label></td>
     </tr>
     <tr>
       <td><label><input type="checkbox"><span>7km 러닝<br>(±100m)</span></label></td>
@@ -135,71 +77,48 @@
     </tr>
   </table>
 
+  <div class="notes">
+    <h2>미션 설명</h2>
+    <ol>
+      <li><strong>GPS 아트 러닝 (제목짓기)</strong><br>
+        GPS러닝은 본인이 뛴 러닝코스에 걸맞게 이름을 붙이시면 됩니다.<br>
+        (다른 사람과 제목 중복 불가)<br>
+        예시) 탄천에서 뜀 : 지렁이 런이었습니다!<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;율동공원에서 뜀 : 제 배를 그려보았습니다!
+      </li>
+      <li><strong>5.1km (±100m) or 510페이스 (±10초)</strong><br>
+        5.1km 또는 510페이스 중 <u>하나만</u> 충족하셔도 됩니다.
+      </li>
+      <li><strong>벙 주최하기 (종류 무관)</strong><br>
+        영화벙, 음식벙 등 모든 벙 포함입니다. 벙에 대한 규칙 필독하시고 벙 오픈!
+      </li>
+      <li><strong>마일리지 월 50km</strong><br>
+        러닝에서 마일리지는 현재까지 달린 거리를 의미합니다. 빙고 시작 이후부터 마무리 시점까지 총 누적 50km 이상을 뛰시면 됩니다.
+      </li>
+      <li><strong>본인만의 회복 방법 공유</strong><br>
+        회복 = 러닝 후 식사, 마사지, 아이싱, 명상, 수면 등등 모두 해당됩니다.
+      </li>
+      <li><strong>단톡방에 러닝 관련 정보 공유하기</strong><br>
+        대회, 러닝템 정보, 이벤트 정보 등을 공유해 주시면 됩니다.
+      </li>
+    </ol>
+  </div>
+
 <script>
-  const STORAGE_KEY = 'trtrBingo';
-
-  const checkboxes = Array.from(document.querySelectorAll('#bingo-table input[type="checkbox"]'));
-  checkboxes.forEach((cb, idx) => cb.dataset.idx = idx);
-
-  const lines = [
-    [0,1,2,3,4], [5,6,7,8,9], [10,11,12,13,14], [15,16,17,18,19], [20,21,22,23,24],
-    [0,5,10,15,20], [1,6,11,16,21], [2,7,12,17,22], [3,8,13,18,23], [4,9,14,19,24],
-    [0,6,12,18,24], [4,8,12,16,20]
-  ];
-
-  const bingoCountEl = document.getElementById('bingo-count');
-  const resetBtn = document.getElementById('reset-btn');
-
-  function loadState() {
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      saved.forEach(idx => {
-        if (checkboxes[idx]) checkboxes[idx].checked = true;
-      });
-    } catch(e) {
-      console.warn('Unable to load saved bingo state:', e);
-    }
-  }
-
-  function saveState() {
-    const checkedIndices = checkboxes.map((cb,i)=>cb.checked?i:null).filter(i=>i!==null);
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedIndices));
-    } catch(e) {
-      console.warn('Unable to save bingo state:', e);
-    }
-  }
-
-  function updateCellStyles() {
-    checkboxes.forEach(cb => {
-      cb.closest('td').classList.toggle('checked', cb.checked);
-    });
-  }
-
-  function updateBingoCount() {
-    const checked = new Set(checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null));
-    let count = 0;
-    for (const line of lines) {
-      if (line.every(idx => checked.has(idx))) count++;
-    }
-    bingoCountEl.textContent = `BINGO: ${count}`;
-    saveState();
-    updateCellStyles();
-  }
-
-  function resetBoard() {
-    localStorage.removeItem(STORAGE_KEY);
-    checkboxes.forEach(cb => cb.checked = false);
-    updateBingoCount();
-  }
-
-  resetBtn.addEventListener('click', resetBoard);
-
-  loadState();
-  updateCellStyles();
-  updateBingoCount();
-
-  checkboxes.forEach(cb => cb.addEventListener('change', updateBingoCount));
+  const STORAGE_KEY='trtrBingo';
+  const checkboxes=[...document.querySelectorAll('#bingo-table input[type="checkbox"]')];
+  checkboxes.forEach((cb,i)=>cb.dataset.idx=i);
+  const lines=[[0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19],[20,21,22,23,24],[0,5,10,15,20],[1,6,11,16,21],[2,7,12,17,22],[3,8,13,18,23],[4,9,14,19,24],[0,6,12,18,24],[4,8,12,16,20]];
+  const bingoCountEl=document.getElementById('bingo-count');
+  const resetBtn=document.getElementById('reset-btn');
+  function loadState(){try{const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');saved.forEach(idx=>{if(checkboxes[idx])checkboxes[idx].checked=true;});}catch(e){console.warn('load err',e);}}
+  function saveState(){const checked=checkboxes.map((cb,i)=>cb.checked?i:null).filter(i=>i!==null);try{localStorage.setItem(STORAGE_KEY,JSON.stringify(checked));}catch(e){console.warn('save err',e);}}
+  function updateCellStyles(){checkboxes.forEach(cb=>cb.closest('td').classList.toggle('checked',cb.checked));}
+  function updateBingoCount(){const checkedSet=new Set(checkboxes.map((cb,i)=>cb.checked?i:null).filter(i=>i!==null));let cnt=0;for(const line of lines){if(line.every(idx=>checkedSet.has(idx)))cnt++;}bingoCountEl.textContent=`BINGO: ${cnt}`;saveState();updateCellStyles();}
+  function resetBoard(){localStorage.removeItem(STORAGE_KEY);checkboxes.forEach(cb=>cb.checked=false);updateBingoCount();}
+  resetBtn.addEventListener('click',resetBoard);
+  loadState();updateCellStyles();updateBingoCount();
+  checkboxes.forEach(cb=>cb.addEventListener('change',updateBingoCount));
 </script>
 </body>
 </html>
